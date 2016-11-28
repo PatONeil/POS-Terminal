@@ -1,0 +1,74 @@
+<div title="Order Discounts" style="font-size:14px;overflow:hidden;background-color:#ffFeF8;width:700px;float:left;padding:0px;margin:0px;border:1px solid grey" id="customerSelectContainer">
+<!--<link href="../css/menuTicketMenu.css" rel="stylesheet" type="text/css" /> -->
+	<div style="width:100%;padding-top:15px; float:left;">	<!-- Main Container -->
+		<div style="width:40%;float:left;text-align:center;">	<!-- Discount List -->
+			<div style="float:left;">	<!-- Discount List -->
+				<div style="font-size:20px;font-weight:bold;text-align:center;">Discount List</div>
+				<ul id="discountList" style="list-style:none;padding:0px;padding-left:10px;">
+					<li value="Employee" class="discountListButton">Employee 10% discount</li>
+					<li value="FreeLunch" class="discountListButton">Free Lunch Entree for Two</li>
+					<li value="FreeBreakfast" class="discountListButton">Free Breakfast Entree for Two</li>
+					<li value="AdjustTotal" class="discountListButton">Fixed Total Price</li>
+				</ul>
+			</div>
+		</div>
+		<div style="width:60%;float:left;text-align:center;">	<!-- Order Item List -->
+			<div style="font-weight:bold;width:420px;height:38px;background-color:#ffe;border:2px solid grey">
+				<div style="border-right:1px solid grey;padding:11px 0px;float:left;width:48px;overflow:hidden;">Qty</div>
+				<div style="border-right:1px solid grey;text-align:left;float:left;width:186px;overflow:hidden;">
+					<div style="padding:1px 5px;border-bottom:1px solid grey;text-align:left;float:left;width:100%;overflow:hidden;">Description</div>
+					<div style="padding:1px 5px;text-align:left;float:left;width:100%;overflow:hidden;">Discount</div>
+				</div>
+				<div style="padding:3px 5px;border-right:1px solid grey;text-align:right;float:left;width:70px;overflow:hidden;">Total<br>Price</div>
+				<div style="padding:3px 5px;border-right:0px solid grey;text-align:right;float:left;width:70px;overflow:hidden;">Total<br>Discount</div>
+			</div>
+			<div id="discountItems" style="overflow-x:hidden;overflow-y:scroll;width:420px;height:300px;margin-bottom:5px;border-left:1px solid grey;border-bottom:1px solid grey;">
+			</div>
+			<div style="width:420px;">
+				<div id='discountOpButtons'style="float:left; text-align:center;width:203px;height:105px;overflow:hidden;">
+					<div class="actionButton" style="margin:4px;width:145px;height:24px;">
+						<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+							Select All
+						</div>
+					</div>
+					<div class="actionButton" style="margin:4px;width:145px;height:24px;">
+						<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+							Unselect All
+						</div> 
+					</div>
+					<div class="actionButton" style="margin:4px;width:145px;height:24px;">
+						<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+							Clear Discounts
+						</div>
+					</div>
+				</div>
+				<div style="font-size:20px;font-weight:bold;text-align:right;float:left;width:185px;overflow:hidden;">
+					<div style="float:left;width:90px;overflow:hidden;">
+						<div style="float:left;width:100%;">Subtotal</div>
+						<div style="float:left;width:100%;">Discount</div>
+						<div style="float:left;width:100%;">Tax</div>
+						<div style="float:left;width:100%;">Total</div>
+					</div>
+					<div style="float:left;width:95px;overflow:hidden;">
+						<div id="discountSubtotal" style="float:left;width:100%;">1012.12</div>
+						<div id="discountDiscount" style="float:left;width:100%;">12.12</div>
+						<div id="discountTax"      style="float:left;width:100%;">10.00</div>
+						<div id="discountTotal"    style="float:left;width:100%;">1000.00</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div id="discountButtons" style="padding:10px 0px;margin-top:10px;width:100%;border-bottom:2px solid #5c9ccc;border-top:2px solid #5c9ccc;float:left;text-align:center;">	<!-- OK Cancel Buttons -->
+		<div class="actionButton" style="float:right;margin:4px;margin-right:55px;width:135px;height:24px;">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+				Cancel
+			</div>
+		</div>
+		<div class="actionButton" style="float:right;margin:4px;margin-right:20px;width:135px;height:24px;">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+				OK
+			</div>
+		</div>
+	</div>	
+</div>

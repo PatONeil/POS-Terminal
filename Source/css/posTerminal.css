@@ -1,0 +1,102 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+/* Background Colors for Page components */
+.menuTicketPageHeader {
+	background-color:#fffefa;
+}
+.menuTicketPageButtonArea {
+	background-color:#fffefa;
+}
+.menuTicketPageTotalArea {
+	background-color:#fffefa;	
+}
+.menuTicketMenuPageHeader {
+	background-color:#fffeF8;	
+}
+.menuTicketMenuPageTable {
+	background-color:#fffeF8;
+}
+.menuOrderPageButtonArea {
+	background-color:#fffeF8;
+}
+
+/* 	tableCell class used for drop down list of optional/default menu items 
+	Only modify background color or border color							*/
+.tableCell  ul {    
+    background-color:rgb(225,75,75);
+	border: 1px solid #5c9ccc;
+    position:absolute;
+    width:130px;
+	padding-left:0px;
+}
+.tableCell li {
+    background-color: #98c8ca;
+    position:relative;
+    margin:0px;
+    padding: 12px 0px;
+    padding-left:0px;
+    display:block;
+    border-bottom:solid 1px rgb(200,50,50);
+}
+.tableCell li:hover {
+	background-color: #c1c1a4
+}
+/* tableCell class used for drop down list of optional/default menu items */
+
+/* replacement for javascript alert!!! */
+.confirmButton {
+	width:90px;
+	height:40px;
+	z-index:2000;
+}
+
+/* text blinking used when in Edit Mode for orders 					      */
+.css_blink {
+	-webkit-animation-name: blinker;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+
+	-moz-animation-name: blinker;
+	-moz-animation-duration: 2s;
+	-moz-animation-timing-function: linear;
+	-moz-animation-iteration-count: infinite;
+
+	animation-name: blinker;
+	animation-duration: 2s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+@-moz-keyframes blinker {  
+	0% { opacity: 1.0; }
+	50% { opacity: 0.3; }
+	100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+	0% { opacity: 1.0; }
+	50% { opacity: 0.3; }
+	100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+	0% { opacity: 1.0; }
+	50% { opacity: 0.3; }
+	100% { opacity: 1.0; }
+}
+/* End blinking used when in Edit Mode for orders 					      */

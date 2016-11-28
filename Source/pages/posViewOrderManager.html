@@ -1,0 +1,66 @@
+<style>
+.altRowColors {
+	tr:nth-child(even) {background: #CCC}
+	tr:nth-child(odd) {background: #FFE}
+}
+</style>
+<div id="posViewOrderManager" style="margin:0px;padding:0px;width:1022;height:764px;border:1px solid #fec;overflow:hidden;">
+	<h1 style="text-align:center;margin:10px 0px;">Order Management</h1>
+	<div style="width:100%;padding:0px 20px;margin-bottom:10px">
+		<div style="font-weight:bold;font-size:24px;">
+			<span>Select View:</span>
+		<select id="viewOrderSelect" style="font-size:20px;">
+			<option value="pendingOrders" selected="selected">Pending Payment Orders For Day</option>
+			<option value="pendingOrdersWeek" >Pending Payment Orders For Last 7 Days</option>
+			<option value="dayOrders">Orders for This Day</option>
+			<option value="houseOrders">Unpaid House Account Orders</option>
+			<option value="corporateOrders">Unpaid Corporate Account Orders</option>
+		</select>
+	</div>
+	</div>
+	<div style="font-size:10px;padding:0px;margin:10px;width:1022px;height:606px;overflow:auto;">
+		<table class="altRowColors" style="font-size:18px;" cellspacing="0" cellpadding="0">
+		<thead style="display:block;"><tr>
+			<th style="padding:5px 8px;text-align:center;width:28px;">Till</th>
+			<th style="padding:5px 8px;text-align:center;width:43px;">Num.</th>
+			<th style="padding:5px 8px;width:155px;">Date</th>
+			<th style="padding:5px 8px;width:90px;text-align:left;">Employee</th>
+			<th style="padding:5px 8px;width:90px;text-align:left;">Customer</th>
+			<th style="padding:5px 8px;width:60px;text-align:left;">Status</th>
+			<th style="padding:5px 8px;text-align:right;width:65px;">Subtotal</th>
+			<th style="padding:5px 8px;text-align:right;width:67px;">Discount</th>
+			<th style="padding:5px 8px;text-align:right;width:61px;">Tax</th>
+			<th style="padding:5px 8px;text-align:right;width:65px;">Total</th>
+			<th style="padding:5px 8px;text-align:right;width:65px;">Paid</th>
+		</tr></thead>
+		<tbody id="ViewOrderContainer" style="width:1000px;height:565px;overflow-y:auto;display: block;">
+		</tbody></table>
+	</div>
+	<div id="viewOrderMgrButtons" style="margin-top:5px;margin-right:10px;border:2px solid #5c9ccc;height:50px">
+		<div style='float:right;margin:0px 20px;margin-top:10px;width:120px;height:30px;' class="actionButton">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+						Done
+			</div>
+		</div>
+		<div style='float:right;margin:0px 20px;margin-top:10px;width:120px;height:30px;' class="actionButton">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+						Pay
+			</div>
+		</div>
+		<div style='float:right;margin:0px 20px;margin-top:10px;width:120px;height:30px;' class="actionButton">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+						Edit
+			</div>
+		</div>
+		<div style='float:right;margin:0px 20px;margin-top:10px;width:120px;height:30px;' class="actionButton">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+						Print
+			</div>
+		</div>
+		<div style='float:right;margin:0px 20px;margin-top:10px;width:120px;height:30px;' class="actionButton">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+						View
+			</div>
+		</div>
+	</div>	
+</div>

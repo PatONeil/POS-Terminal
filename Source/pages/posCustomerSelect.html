@@ -1,0 +1,65 @@
+<div id="customerSelectDialog" title="Select Customer" style="overflow:hidden;width:798px;float:left;padding:0px;margin:0px;border:1px solid grey" id="customerSelectContainer">
+<link href="../css/menuTicketMenu.css" rel="stylesheet" type="text/css" />
+	<div style="width:100%;border-bottom:2px solid #5c9ccc;float:left">	
+		<div style="width:437px;float:left;padding:10px;">
+			<div style="">
+				<p style="margin:0px;padding:0px;">Enter One Time Customer Name:</p>
+				<input id="oneTimeName" type="text"  style="margin:10px 0px;width:80%"></input>
+				<div id="posKeyboard" style="clear:both;float:right;display:inline-block;">
+				</div>
+			</div>
+		</div>
+		<div style="width:300px;float:left;padding:10px;border-left:2px solid #5c9ccc;">
+			<div style="">
+				<p style="margin:0px;padding:0px;">Select Regular Customer Name:</p>
+				<div style="height:20px;">
+					<select id="regularSelect" style="font-size:18px;width:200px">
+						onfocus='this.size=8;' 
+						onblur='this.size=1;' 
+						onchange='this.size=1; this.blur();'
+						style="margin-top:10px;width:90%;">
+					</select>
+				</div>
+			</div>
+			<div style="">
+				<p style="margin:0px;padding:0px;margin-top:25px;">Select House Account Name:</p>
+				<div style="height:20px;">
+					<select id="houseSelect" style="font-size:18px;width:200px">
+						onfocus='this.size=8;' 
+						onblur='this.size=1;' 
+						onchange='this.size=1; this.blur();'
+						style="margin-top:10px;width:90%;">
+					</select>
+				</div>
+			</div>
+			<div style="margin-bottom:25px;">
+				<p style="margin:0px;padding:0px;margin-top:25px;">Select Corporate Account Name:</p>
+				<div style="height:20px;">
+					<select id="custSelect" style="font-size:18px;width:200px">
+						onfocus='this.size=8;' 
+						onblur='this.size=1;' 
+						onchange='this.size=1; this.blur();'
+						style="margin-top:10px;width:90%;">
+					</select>
+				</div>
+			</div>
+			<div class="actionButton" style="margin:10px 4px;width:90%;height:24px;margin-top:40px;">
+				<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+					Add Customer
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="width:100%;border-bottom:2px solid #5c9ccc;float:left;text-align:center;">	
+		<div class="actionButton" style="margin:4px;width:135px;height:24px;">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+				OK
+			</div>
+		</div>
+		<div class="actionButton" style="margin:4px;width:135px;height:24px;">
+			<div style="position: relative;top: 50%;transform: perspective(1px) translateY(-50%);">
+				Cancel
+			</div>
+		</div>
+	</div>	
+</div>
