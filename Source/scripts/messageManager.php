@@ -19,7 +19,7 @@ if (!SQLConnect()) print "<br>SQLConnect Error";
 			$query = "SELECT * FROM messages";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -37,7 +37,7 @@ if (!SQLConnect()) print "<br>SQLConnect Error";
 			global $db;
 			$query="delete from messages where id = '".$_REQUEST['id']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in Message Table  on delete\n$query");
+				posLog("Error in Message Table  on delete\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -55,7 +55,7 @@ if (!SQLConnect()) print "<br>SQLConnect Error";
 			$end  =date("Y-m-d H:i:s",strtotime($_REQUEST['endTime']));
 			$query = "insert into messages (startTime,endTime,message) values('$start','$end','".addslashes($_REQUEST['message'])."');";
 			if (!$db->query($query)) {
-				ssLog("Error in Message Table  on delete\n$query");
+				posLog("Error in Message Table  on delete\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";

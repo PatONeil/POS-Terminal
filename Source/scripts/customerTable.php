@@ -17,7 +17,7 @@ require_once "connectPOS.php";
 		$query = "SELECT * FROM customers order by `name`;";
 		$result = $db->query($query);
 		if (!$result) {
-			ssLog("Error in query\n $query");
+			posLog("Error in query\n $query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -39,7 +39,7 @@ require_once "connectPOS.php";
 		$query = "SELECT * FROM customers order by $sortColumn;";
 		$result = $db->query($query);
 		if (!$result) {
-			ssLog("Error in query\n $query");
+			posLog("Error in query\n $query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -57,7 +57,7 @@ require_once "connectPOS.php";
 	else if($_REQUEST["action"] == "delete") {
 		$query="Delete from customers where ID = '".$_REQUEST['id']."';";
 		if (!$db->query($query)) {
-			ssLog("Error in customerTable  on delete\n$query");
+			posLog("Error in customerTable  on delete\n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -81,7 +81,7 @@ require_once "connectPOS.php";
 		$valuelist = implode(",",$valueList);
 		$query = "insert into customers ($keylist) values($valuelist);";
 		if ($db->query($query)===false) {
-			ssLog("Error in customerTable  on create\n$query");
+			posLog("Error in customerTable  on create\n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!\n$query";
@@ -91,7 +91,7 @@ require_once "connectPOS.php";
 		$query = "select * from customers where id='".$db->insert_id."'";
 		$result = $db->query($query);
 		if ($result===false) {
-			ssLog("Error in customerTable .. select\n$query");
+			posLog("Error in customerTable .. select\n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -117,7 +117,7 @@ require_once "connectPOS.php";
 		$qlist=implode(',',$qPart);
 		$query = "update customers set $qlist where ID='".$_REQUEST['id']."';";
 		if (!$db->query($query)) {
-			ssLog("Error in customerTable  on update]n$query");
+			posLog("Error in customerTable  on update]n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -130,7 +130,7 @@ require_once "connectPOS.php";
 		exit;
 	}
 	else {
-			ssLog("Error in customerTable - invalid action=".$_REQUEST['action']);
+			posLog("Error in customerTable - invalid action=".$_REQUEST['action']);
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "Invalid action";

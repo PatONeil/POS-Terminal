@@ -10,5 +10,5 @@
  */
 
 require_once "connectPOS.php";
-	ssLog("Client Msg: ".$_REQUEST['msg']);
+	posLog("Client Msg: ".$_REQUEST['msg']);
 ?>

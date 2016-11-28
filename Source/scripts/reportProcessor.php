@@ -23,7 +23,7 @@ require_once "connectPOS.php";
 				  "from orders where Date(orderDate) > '$date' group by Date(orderDate) order by Date(orderDate) desc;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -71,7 +71,7 @@ require_once "connectPOS.php";
 			global $db;
 			$result = $db->query("select sum(houseAccountCharge) as _total, customerName from orders where houseAccountCharge!=0 group by customerName");
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -132,7 +132,7 @@ require_once "connectPOS.php";
 					 "order by `Total Price` DESC;"; 
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -201,10 +201,10 @@ require_once "connectPOS.php";
 					 "SELECT date_format(orderDate,'%H') as Hour, COUNT(*) as Orders, sum(ROUND(total,2)) FROM orders ".
 					 "where substring(`id`,1,6) >= $startDate and substring(`id`,1,6) <= $endDate  ".
 					 "GROUP BY Hour ORDER BY Hour;";
-ssLog($query);					 
+posLog($query);					 
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -247,7 +247,7 @@ ssLog($query);
 		call_user_func($actions[$_REQUEST['action']],'');
 	}
 	else {
-		ssLog("Error in order table - invalid action=".$_REQUEST['action']);
+		posLog("Error in order table - invalid action=".$_REQUEST['action']);
 		$jTableResult = array();
 		$jTableResult['Result']  = "ERROR";
 		$jTableResult['Message'] = "Invalid action";

@@ -19,7 +19,7 @@ require_once "connectPOS.php";
 			$query = "SELECT * FROM employees where active = 1 order by `name`;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -42,7 +42,7 @@ require_once "connectPOS.php";
 			$query = "SELECT * FROM employees order by $sortColumn;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -61,7 +61,7 @@ require_once "connectPOS.php";
 			global $db,$employeeFieldList;
 			$query="delete from employees where ID = '".$_REQUEST['id']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in employeeTable  on delete\n$query");
+				posLog("Error in employeeTable  on delete\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -86,7 +86,7 @@ require_once "connectPOS.php";
 			$valuelist = implode(",",$valueList);
 			$query = "insert into employees ($keylist) values($valuelist);";
 			if ($db->query($query)===false) {
-				ssLog("Error in employeeTable  on create\n$query");
+				posLog("Error in employeeTable  on create\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!\n$query";
@@ -96,7 +96,7 @@ require_once "connectPOS.php";
 			$query = "select * from employees where ID='".$db->insert_id."'";
 			$result = $db->query($query);
 			if ($result===false) {
-				ssLog("Error in employeeTable .. select\n$query");
+				posLog("Error in employeeTable .. select\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -122,7 +122,7 @@ require_once "connectPOS.php";
 			$qlist=implode(',',$qPart);
 			$query = "update employees set $qlist where ID='".$_REQUEST['id']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in employeeTable  on update]n$query");
+				posLog("Error in employeeTable  on update]n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -139,7 +139,7 @@ require_once "connectPOS.php";
 			$query = "select * from employees where ID='".$_REQUEST['id']."'";
 			$result = $db->query($query);
 			if ($result===false) {
-				ssLog("Error in employeeTable .. select\n$query");
+				posLog("Error in employeeTable .. select\n$query");
 				if ($returnArray) return array();
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";

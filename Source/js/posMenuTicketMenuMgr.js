@@ -266,7 +266,7 @@
 							if (!self.currentSelTarget) return;		// entered without currentSel
 							console.log("Entered click for div Elements-with currentSel");
 							var div = $(e.delegateTarget), ndx  = div.data('value'), ul_id = div.parent().attr('id');
-							var did = ul_id.substr(0,ul_id.length-3), treeNode = $('#'+did).data();
+							var did = ul_id.substr(0,ul_id.length-3);//, treeNode = $('#'+did).data();
 							$(self.currentSelTarget).css('display','none');
 							self.currentSelTarget='';
 							$(document).off('click.menuMgr');

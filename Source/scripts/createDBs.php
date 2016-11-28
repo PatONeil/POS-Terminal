@@ -49,21 +49,22 @@ CREATE TABLE `orders` (
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS orderitems;
-CREATE TABLE `orderitems` (  
-	`id` int(11) NOT NULL AUTO_INCREMENT,  
-	`order` varchar(16) NOT NULL,  
-	`product` varchar(45) NOT NULL,  
-	`productID` varchar(32) NOT NULL,  
-	`quantity` int(11) NOT NULL DEFAULT '1',  
-	`options` varchar(1024) NOT NULL,  
-	`price` float NOT NULL,  
-	`discount` float NOT NULL DEFAULT '0',  
-	`menuTreeID` double NOT NULL,  
-	PRIMARY KEY (`id`),  
-	UNIQUE KEY `id_UNIQUE` (`id`),  
-	KEY `order` (`order`),  
-	KEY `product` (`product`)
-	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `orderitems` ( `
+	id` int(11) NOT NULL AUTO_INCREMENT, 
+	`order` varchar(16) NOT NULL, 
+	`product` varchar(45) NOT NULL, 
+	`productID` INT(11) NULL, 
+	`quantity` int(11) NOT NULL DEFAULT '1', 
+	`options` varchar(1024) NOT NULL, 
+	`price` float NOT NULL, 
+	`discount` float NOT NULL DEFAULT '0', 
+	`menuTreeID` double NOT NULL, 
+	PRIMARY KEY (`id`), UNIQUE KEY `id_UNIQUE` (`id`), 
+	KEY `order` (`order`), 
+	KEY `product` (`product`)) 
+	ENGINE=InnoDB AUTO_INCREMENT=18226 DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS tills;
 CREATE TABLE `tills` (  
@@ -80,18 +81,18 @@ CREATE TABLE `tills` (
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS products;
-CREATE TABLE `products` (  
-	`productID` varchar(20) NOT NULL,  
-	`category` varchar(15) NOT NULL,  
-	`longText` varchar(45) NOT NULL,  
-	`shortText` varchar(20) NOT NULL,  
-	`type` varchar(15) NOT NULL,  
-	`price` float NOT NULL,  
-	`taxable` int(11) NOT NULL DEFAULT '1',  
-	`prepLocation` int(11) NOT NULL,  
-	PRIMARY KEY (`productID`),  
-	UNIQUE KEY `productID_UNIQUE` 
-	(`productID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `products` ( 
+	`id` int(11) NOT NULL AUTO_INCREMENT, 
+	`category` varchar(15) NOT NULL, 
+	`longText` varchar(45) NOT NULL, 
+	`shortText` varchar(20) NOT NULL, 
+	`type` varchar(15) NOT NULL, 
+	`price` float NOT NULL, 
+	`taxable` int(11) NOT NULL DEFAULT '1', 
+	`prepLocation` int(11) NOT NULL, 
+	PRIMARY KEY (`id`)) 
+  ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS customers;
 CREATE TABLE `customers` (  
@@ -120,19 +121,20 @@ INSERT INTO employees (`id`,`name`,`phone`,`type`,`password`,`active`) VALUES(1,
 
 	
 DROP TABLE IF EXISTS menu;
-CREATE TABLE `menu` (  
-	`menuID` varchar(16) NOT NULL,  
-	`parent` varchar(16) DEFAULT NULL,  
-	`row` int(11) NOT NULL,  
-	`col` int(11) NOT NULL,  
-	`type` varchar(32) NOT NULL,  
-	`caption` varchar(36) DEFAULT NULL,  
-	`productID` varchar(32) DEFAULT '',  
-	`active` int(11) NOT NULL DEFAULT '0',  
-	`priceOverride` float NOT NULL DEFAULT '-1',  
-	`online` tinyint(1) NOT NULL DEFAULT '1',  
-	PRIMARY KEY (`menuID`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `menu` ( 
+	`id` varchar(16) NOT NULL, 
+	`parent` varchar(16) DEFAULT NULL, 
+	`row` int(11) NOT NULL, 
+	`col` int(11) NOT NULL, 
+	`type` varchar(1) NOT NULL, 
+	`text` varchar(36) DEFAULT NULL, 
+	`productID` INT NULL, 
+	`active` int(11) NOT NULL DEFAULT '0', 
+	`priceOverride` float NOT NULL DEFAULT '-1', 
+	`online` tinyint(1) NOT NULL DEFAULT '1', 
+	PRIMARY KEY (`id`)) 
+	ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 	
 DROP TABLE IF EXISTS options;
@@ -183,7 +185,7 @@ INSERT INTO till_uses (`id`,`type`,`name`) VALUES(7,'add','Gift Certificate Sale
 INSERT INTO till_uses (`id`,`type`,`name`) VALUES(8,'drop','Transfer to Cash Bank');
 INSERT INTO till_uses (`id`,`type`,`name`) VALUES(9,'drop','Cash Donation');
 
-DRop Table if exist `messages`;
+DROP TABLE IF EXISTS messages;
 CREATE TABLE  `messages` (
  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
  `startTime` DATETIME NOT NULL ,

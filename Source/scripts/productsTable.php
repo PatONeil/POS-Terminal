@@ -37,7 +37,7 @@ require_once "connectPOS.php";
 			$query = "SELECT * FROM products order by `longText`;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -63,7 +63,7 @@ require_once "connectPOS.php";
 			$query = "SELECT * FROM products order by $sortColumn;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -82,7 +82,7 @@ require_once "connectPOS.php";
 			global $db,$productActions,$productFieldList;
 			$query="Delete from products where id = '".addslashes($_REQUEST['id'])."';";
 			if (!$db->query($query)) {
-				ssLog("Error in productsTable  on delete\n$query");
+				posLog("Error in productsTable  on delete\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -106,9 +106,9 @@ require_once "connectPOS.php";
 			$keylist=implode(",",$keylist);
 			$valuelist = implode(",",$valueList);
 			$query = "insert into products ($keylist) values($valuelist);";
-	//		ssLog($query);
+	//		posLog($query);
 			if ($db->query($query)===false) {
-				ssLog("Error in productsTable  on create\n$query");
+				posLog("Error in productsTable  on create\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!\n$query";
@@ -118,7 +118,7 @@ require_once "connectPOS.php";
 			$query = "select * from products where id='".addslashes($_REQUEST['id'])."'";
 			$result = $db->query($query);
 			if ($result===false) {
-				ssLog("Error in productsTable .. select\n$query");
+				posLog("Error in productsTable .. select\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -145,7 +145,7 @@ require_once "connectPOS.php";
 			$qlist=implode(',',$qPart);
 			$query = "update products set $qlist where id='".addslashes($_REQUEST['id'])."';";
 			if (!$db->query($query)) {
-				ssLog("Error in productsTable  on update]n$query");
+				posLog("Error in productsTable  on update]n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";

@@ -37,13 +37,14 @@ set_time_limit (300);
 			$query = "select * from menu where parent={$_REQUEST['parent']} and row={$_REQUEST['row']} and col={$_REQUEST['col']}";
 			$result = $db->query($query);
 			if ($result and $result->num_rows!=0) {
-				ssLog("duplicate row/col found for parent. {$result->num_rows} $query");
+				posLog("duplicate row/col found for parent. {$result->num_rows} $query");
 				print "ERROR - duplicate row/col found for parent. Item not created.";
 				exit;
 			}
 			$keylist = [];
 			$valueList = [];
 			foreach ($menuTreefieldList as $field) {
+				if ($field == 'productID' and is_numeric($_REQUEST[$field])==false) $_REQUEST[$field]=0;
 				$keylist[] = "`$field`";
 				$valueList[] = is_numeric($_REQUEST[$field])?$_REQUEST[$field]:"'".addslashes($_REQUEST[$field])."'";
 			}
@@ -51,7 +52,7 @@ set_time_limit (300);
 			$valuelist = implode(",",$valueList);
 			$query = "insert into menu ($keylist) values($valuelist);";
 			if ($db->query($query)===false) {
-				ssLog("Error in menu on create\n$query");
+				posLog("Error in menu on create\n$query");
 				print "Error in menu on create\n$query";
 				exit;
 			}
@@ -67,7 +68,7 @@ set_time_limit (300);
 			}
 			$query="Delete from menu where id = '$id';";
 			if (!$db->query($query)) {
-				ssLog("Error on menu delete \n$query");
+				posLog("Error on menu delete \n$query");
 				print "Error on menu delete \n$query";
 				exit;
 			}
@@ -81,7 +82,7 @@ set_time_limit (300);
 			$query = "select * from menu where id!={$_REQUEST['id']} and parent={$_REQUEST['parent']} and row={$_REQUEST['row']} and col={$_REQUEST['col']}";
 			$result = $db->query($query);
 			if ($result and $result->num_rows!=0) {
-				ssLog("duplicate row/col found for parent. $query");
+				posLog("duplicate row/col found for parent. $query");
 				print "ERROR - duplicate row/col found for parent. Item not created.";
 				exit;
 			}
@@ -89,6 +90,7 @@ set_time_limit (300);
 			
 			foreach ($menuTreefieldList as $field) {
 				if ($field == 'id') continue;
+				if ($field == 'productID' and is_numeric($_REQUEST[$field])==false) $_REQUEST[$field]=0;
 				$p = "`$field`=";
 				if (is_numeric($_REQUEST[$field])) $p.=$_REQUEST[$field]; else $p.="'".addslashes($_REQUEST[$field])."'";
 				$qPart[]=$p;
@@ -96,7 +98,7 @@ set_time_limit (300);
 			$qlist=implode(',',$qPart);
 			$query = "update menu set $qlist where id='".$_REQUEST['id']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in menuTable  on update]n$query");
+				posLog("Error in menuTable  on update]n$query");
 				print "error in MySQL!!!";
 			}
 			print "OK";
@@ -107,7 +109,7 @@ set_time_limit (300);
 			$query = "select * from menu";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				print "Error in query\n $query";
 				exit;
 			}
@@ -143,7 +145,7 @@ set_time_limit (300);
 			$query = "select * from menu";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				print "Error in query\n $query";
 				exit;
 			}

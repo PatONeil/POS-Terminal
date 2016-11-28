@@ -75,7 +75,7 @@ use Escpos\PrintConnectors\WindowsPrintConnector;
 		$tPrtr->feed(2);
 	}
 	if (!isset($_REQUEST['till'])) {
-		ssLog("No Till Specified on Till Print Request");
+		posLog("No Till Specified on Till Print Request");
 		$jTableResult = array();
 		$jTableResult['Result']  = "ERROR";
 		$jTableResult['Message'] = "No Till Specified on Till Print Request";

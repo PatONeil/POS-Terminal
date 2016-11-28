@@ -9,19 +9,19 @@
  *   http://www.opensource.org/licenses/mit-license.php
  */
 	$path     = "localhost";
-	$username = "";
-	$password = "";
-	$databaseName="";
+	$username = "POS_USER";
+	$password = "PASSWORD";
+	$databaseName="pos_terminal";
 	error_reporting(E_ALL);
 	global $db;
 	ini_set("date.timezone", "America/New_York");
 	function SQLConnect() {
-		global $db,$db_err,$db_connected;
+		global $db,$db_err,$db_connected,$path,$username,$password,$databaseName;
 		if ($db_connected) return true;
 		$db = new mysqli($path, $username, $password, $databaseName);
 		if (!$db or $db->connect_errno) {
 			$db_err = "Failed to connect to MySQL: (" . $db->connect_errno . ") " . $db->connect_error;
-			ssLog($db_err,"SSBadLogin.txt");
+			posLog($db_err,"SSBadLogin.txt");
 			return false;
 		}
 		$db_connected=true;	
@@ -40,7 +40,7 @@
 		error_reporting(0);    		// turn off error reporting 
 		set_error_handler(NULL); 	// turn off this error handler to avoid recursive entry.
 		$backtrace=stackTrace();
-		ssLog("Error in server side code:  $errstr in $errfile($errline)\n$backtrace","SS_PHP_Errors.txt",true);
+		posLog("Error in server side code:  $errstr in $errfile($errline)\n$backtrace","SS_PHP_Errors.txt",true);
 
 		print "<script>alert('Error in server side code, please report.')</script>";
 
@@ -49,32 +49,16 @@
 
 	$old_error_handler = set_error_handler("myErrorHandler");
 	
-	function ssLog($msg,$logfile="MessageLog.txt",$force=false) {
-		global $hDir,$FranchiseID,$debugArray;
-		if ($force==false and isset($debugArray[$logfile])==false) return; // no entry in debugArray so $force is sole determinate
-		if (isset($debugArray[$logfile]) and $debugArray[$logfile]==false and $force==false) return; // $debug array does not override $force
-		if (!isset($FranchiseID)) $Franchise=''; else $Franchise=$FranchiseID;
-		$msg = date("Y-m-d H:i:s")."($Franchise) $msg\r\n";
+	function posLog($msg,$logfile="MessageLog.txt") {
+		global $hDir;
+		$msg = date("Y-m-d H:i:s")."$msg\r\n";
 		file_put_contents("$hDir/$logfile", $msg, FILE_APPEND );
 	} 
 	  
-	function ssError($error,$logfile="MessageLog.txt") { 
-		ssLog("Error reported by PHP Script\r\n$error\r\n".stackTrace(false),$logfile,true);
+	function posError($error,$logfile="MessageLog.txt") { 
+		posLog("Error reported by PHP Script\r\n$error\r\n".stackTrace(false),$logfile,true);
 	}	
 	
-	function jsonQuery($query) {
-		global $db;
-		$result=$db->query($query);
-		if ($result===false) {
-			//Return error message
-			$jTableResult = array();
-			$jTableResult['Result'] = "ERROR";
-			$jTableResult['Message'] = "Database error.\n".$db->error."\n$query";
-			print json_encode($jTableResult);
-		}
-		return $result;
-	}
-
 	function stackTrace($skipFirst=true) {
 		try {
 			$stack = debug_backtrace();

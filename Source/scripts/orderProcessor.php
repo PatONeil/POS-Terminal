@@ -24,7 +24,7 @@ require_once "connectPOS.php";
 			$query = "SELECT * FROM orders order by `longText`;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -45,7 +45,7 @@ require_once "connectPOS.php";
 			$fields = json_decode($json,true);
 			$query="Delete from orders where id = '".$fields['id']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in order table  on delete\n$query");
+				posLog("Error in order table  on delete\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -54,7 +54,7 @@ require_once "connectPOS.php";
 			}
 			$query="Delete from orderitems where `order` = '".$fields['id']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in order table  on delete\n$query");
+				posLog("Error in order table  on delete\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -73,7 +73,7 @@ require_once "connectPOS.php";
 			$result = $db->query($query);
 			$order = $result->fetch_assoc();
 			$query = "select * from `orderitems` where `order` = '{$order['id']}';";
-//ssLog($query);			
+//posLog($query);			
 			$result = $db->query($query);
 			$menuItems   =  $result->fetch_all(MYSQLI_ASSOC); 
 			$order['menuItems']=array();
@@ -106,7 +106,7 @@ require_once "connectPOS.php";
 			if (!$result or $result->num_rows==0) $orderNumber = 0 ;
 			else  {
 				$row = $result->fetch_assoc();
-ssLog("getOrderNumber orderNumber={$row['orderNumber']}, orderDate={$row['orderDate']}");				
+posLog("getOrderNumber orderNumber={$row['orderNumber']}, orderDate={$row['orderDate']}");				
 				if (date("ymd")!=date("ymd",strtotime($row['orderDate']))) $orderNumber=0;
 				else $orderNumber = $row['orderNumber'];
 			}
@@ -155,10 +155,10 @@ ssError($query);
 					 "corporateCharge, houseAccountCharge,".
 					 "employees.name as employee,orders.employeeID, customerName,customerID, status,subtotal,totalDiscount,tax,total from orders ".
 					 "left join employees on employees.id = orders.employeeID ".$where[$sel];
-ssLog($query);					 
+posLog($query);					 
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -201,9 +201,9 @@ ssLog($query);
 			$keylist=implode(",",$keylist);
 			$valuelist = implode(",",$valueList);
 			$query = "insert into orders ($keylist) values($valuelist);";
-//ssLog($query);			
+//posLog($query);			
 			if ($db->query($query)===false) {
-				ssLog("Error in order table  on create\n$query");
+				posLog("Error in order table  on create\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!\n$query";
@@ -218,6 +218,9 @@ ssLog($query);
 				//$item['options'] = implode('^',$item['options']);
 				foreach ($itemFieldList as $field) {
 					if (!isset($item[$field])) continue;   // ignore missing fields;
+					if ($field=='productID' and is_numeric($item[$field])==false) {
+						$item[$field] = 0;
+					}
 					$keylist[] = "`$field`";
 					$valueList[] = is_numeric($item[$field])?
 						$item[$field]:
@@ -226,9 +229,9 @@ ssLog($query);
 				$keylist=implode(",",$keylist);
 				$valuelist = implode(",",$valueList);
 				$query = "insert into orderitems ($keylist) values($valuelist);";
-//ssLog($query);			
+//posLog($query);			
 				if ($db->query($query)===false) {
-					ssLog("Error in order table  on create\n$query");
+					posLog("Error in order table  on create\n$query");
 					$jTableResult = array();
 					$jTableResult['Result']  = "ERROR";
 					$jTableResult['Message'] = "error in MySQL!!!\n$query";
@@ -256,9 +259,9 @@ ssLog($query);
 				"giftCertificatePayment={$_REQUEST['giftCertificatePayment']} ,".
 				"settlementDate='".date("Y-m-d H:i:s")."' ".
 				"where id='".$_REQUEST['id']."';";
-//ssLog($query);				
+//posLog($query);				
 			if (!$db->query($query)) {
-				ssLog("Error in order table  on update]n$query");
+				posLog("Error in order table  on update]n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -276,7 +279,7 @@ ssLog($query);
 			exit;
 		},
 		'update'=>function() {
-//ssLog("Order delete called for Update function");			
+//posLog("Order delete called for Update function");			
 			global $db,$orderFieldList,$itemFieldList,$orderActions;
 			call_user_func($orderActions['delete'],true);
 			call_user_func($orderActions['create'],'');

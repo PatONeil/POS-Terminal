@@ -32,7 +32,7 @@ class TicketPrinter {
 		$query = "SELECT * FROM options;";
 		$result = $db->query($query);
 		if (!$result) {
-			ssLog("Error in query\n $query");
+			posLog("Error in query\n $query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";

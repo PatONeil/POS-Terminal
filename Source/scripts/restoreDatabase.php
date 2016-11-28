@@ -69,7 +69,7 @@
 		print "<br> - - Restoring $table";
 		if (!$file) {
 			print "Unable to open file ($filename)!";
-			ssError("Unable to open file ($filename)!");
+			posError("Unable to open file ($filename)!");
 			exit;
 		}
 		while(! feof($file)) {

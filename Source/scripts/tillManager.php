@@ -17,7 +17,7 @@ require_once "optionsTable.php";
 			global $db,$optionsActions;
 			$till = $_REQUEST['till']; 
 			$openTill = call_user_func($optionsActions['getValue'],"autoOpenTill{$till}");
-			ssLog("autoOpenTill Mgr till=$till and openTill=$openTill");			
+			posLog("autoOpenTill Mgr till=$till and openTill=$openTill");			
 			if (!$openTill) {
 				$query = "SELECT * FROM tills where tillName = 'till$till' " .
 						 "and (entryType='tillOpen' or entryType='tillClose') ".
@@ -76,14 +76,14 @@ require_once "optionsTable.php";
 			$query = "INSERT INTO `tills` (`tillName`,`entryType`,`reference`,`amount`,`employeeID`) VALUES ('till$till','tillOpen','$date',$openTillAmt,-1);";
 			$result = $db->query($query);
 			if ($result!==true) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
 				print json_encode($jTableResult);
 				exit;
 			}
-			ssLog("Till$till automatically opened, should have been closed!!!");
+			posLog("Till$till automatically opened, should have been closed!!!");
 			$jTableResult = array();
 			$jTableResult['Message'] = "Till$till automatically opened with $openTillAmt.";
 			$jTableResult['Result'] = "OK";
@@ -93,7 +93,7 @@ require_once "optionsTable.php";
 		'openTill'=>function() {
 			global $db;
 			$till = $_REQUEST['till'];
-ssLog("openTill Mgr till=$till");			
+posLog("openTill Mgr till=$till");			
 			$amount = $_REQUEST['amount'];
 			$employeeID=$_REQUEST['employeeID'];
 			$query = "SELECT * FROM tills where tillName = '$till' " .
@@ -102,7 +102,7 @@ ssLog("openTill Mgr till=$till");
 					 
 			$result = $db->query($query);
 			if ($result===false) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -114,7 +114,7 @@ ssLog("openTill Mgr till=$till");
 				$query = "INSERT INTO `tills` (`tillName`,`entryType`,`reference`,`amount`,`employeeID`) VALUES ('$till','tillOpen','$date',$amount,$employeeID);";
 				$result = $db->query($query);
 				if ($result!==true) {
-					ssLog("Error in query\n $query");
+					posLog("Error in query\n $query");
 					$jTableResult = array();
 					$jTableResult['Result']  = "ERROR";
 					$jTableResult['Message'] = "error in MySQL!!!";
@@ -137,7 +137,7 @@ ssLog("openTill Mgr till=$till");
 		'closeTill'=>function() {
 			global $db;
 			$till = $_REQUEST['till'];
-ssLog("closeTill Mgr till=$till");			
+posLog("closeTill Mgr till=$till");			
 			$amount = $_REQUEST['amount'];
 			$employeeID=$_REQUEST['employeeID'];
 			$query = "SELECT * FROM tills where tillName = '$till' " .
@@ -145,7 +145,7 @@ ssLog("closeTill Mgr till=$till");
 					 "order by id desc limit 1;";
 			$result = $db->query($query);
 			if ($result===false) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -157,7 +157,7 @@ ssLog("closeTill Mgr till=$till");
 				$query = "INSERT INTO `tills` (`tillName`,`entryType`,`reference`,`amount`,`employeeID`) VALUES ('$till','tillClose','$date',$amount,$employeeID);";
 				$result = $db->query($query);
 				if ($result!==true) {
-					ssLog("Error in query\n $query");
+					posLog("Error in query\n $query");
 					$jTableResult = array();
 					$jTableResult['Result']  = "ERROR";
 					$jTableResult['Message'] = "error in MySQL!!!";
@@ -170,7 +170,7 @@ ssLog("closeTill Mgr till=$till");
 				exit;
 			}
 			else {
-ssLog("Till= $till already closed, must be opened before re-closing.");				
+posLog("Till= $till already closed, must be opened before re-closing.");				
 				$jTableResult = array();
 				$jTableResult['Result']  = "OK";
 				$jTableResult['Message'] = ""; //"Till already closed, must be opened before re-closing.";
@@ -190,7 +190,7 @@ ssLog("Till= $till already closed, must be opened before re-closing.");
 					"VALUES ('{$_REQUEST['till']}','order-$type','{$_REQUEST['num']}',{$_REQUEST[$type]},{$_REQUEST['employeeID']});";
 					$result = $db->query($query);
 					if ($result!==true) {
-						ssLog("Error in query\n $query");
+						posLog("Error in query\n $query");
 						$jTableResult = array();
 						$jTableResult['Result']  = "ERROR";
 						$jTableResult['Message'] = "error in MySQL!!!";
@@ -212,7 +212,7 @@ ssLog("Till= $till already closed, must be opened before re-closing.");
 				"'{$_REQUEST['description']}',{$_REQUEST['amount']},{$_REQUEST['employeeID']});";
 			$result = $db->query($query);
 			if ($result!==true) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -232,7 +232,7 @@ ssLog("Till= $till already closed, must be opened before re-closing.");
 					 "order by entryType desc;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -251,7 +251,7 @@ ssLog("Till= $till already closed, must be opened before re-closing.");
 			$query = "select * from options where `key`='till{$_REQUEST['terminalNumber']}Port';";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -263,7 +263,7 @@ ssLog("Till= $till already closed, must be opened before re-closing.");
 			// because "try" does not seem to work!!!!
 			$old_error_handler = set_error_handler(function($errno, $errstr, $errfile, $errline) {
 				global $comPort;
-				ssLog("Invalid port for Cash Drawer: $comPort");
+				posLog("Invalid port for Cash Drawer: $comPort");
 				$jTableResult = array();
 				$jTableResult['Result'] = "OK";
 				print json_encode($jTableResult);

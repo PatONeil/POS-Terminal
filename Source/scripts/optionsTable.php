@@ -19,7 +19,7 @@ require_once "connectPOS.php";
 			$direct = true;
 			if (!isset($key)) {
 				if (!isset($_REQUEST['key'])) {
-					ssLog('invalid request to optionTable->getValue');
+					posLog('invalid request to optionTable->getValue');
 					return;
 				}
 				else {
@@ -47,7 +47,7 @@ require_once "connectPOS.php";
 			$query = "SELECT * FROM options;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -70,7 +70,7 @@ require_once "connectPOS.php";
 			$query = "SELECT * FROM options order by $sortColumn;";
 			$result = $db->query($query);
 			if (!$result) {
-				ssLog("Error in query\n $query");
+				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -89,7 +89,7 @@ require_once "connectPOS.php";
 			global $db;
 			$query="Delete from options where `key` = '".$_REQUEST['key']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in optionsTable  on delete\n$query");
+				posLog("Error in optionsTable  on delete\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -113,7 +113,7 @@ require_once "connectPOS.php";
 			$valuelist = implode(",",$valueList);
 			$query = "insert into options ($keylist) values($valuelist);";
 			if ($db->query($query)===false) {
-				ssLog("Error in optionsTable  on create\n$query");
+				posLog("Error in optionsTable  on create\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!\n$query";
@@ -123,7 +123,7 @@ require_once "connectPOS.php";
 			$query = "select * from options where `key`='".$_REQUEST['key']."'";
 			$result = $db->query($query);
 			if ($result===false) {
-				ssLog("Error in optionsTable .. select\n$query");
+				posLog("Error in optionsTable .. select\n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";
@@ -150,7 +150,7 @@ require_once "connectPOS.php";
 			$qlist=implode(',',$qPart);
 			$query = "update options set $qlist where `key`='".$_REQUEST['key']."';";
 			if (!$db->query($query)) {
-				ssLog("Error in optionsTable  on update]n$query");
+				posLog("Error in optionsTable  on update]n$query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
 				$jTableResult['Message'] = "error in MySQL!!!";

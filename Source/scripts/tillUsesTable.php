@@ -17,7 +17,7 @@ require_once "connectPOS.php";
 		$query = "SELECT * FROM till_uses order by `name`;";
 		$result = $db->query($query);
 		if (!$result) {
-			ssLog("Error in query\n $query");
+			posLog("Error in query\n $query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -39,7 +39,7 @@ require_once "connectPOS.php";
 		$query = "SELECT * FROM till_uses order by $sortColumn;";
 		$result = $db->query($query);
 		if (!$result) {
-			ssLog("Error in query\n $query");
+			posLog("Error in query\n $query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -57,7 +57,7 @@ require_once "connectPOS.php";
 	else if($_REQUEST["action"] == "delete") {
 		$query="Delete from till_uses where id = ".$_REQUEST['id'].";";
 		if (!$db->query($query)) {
-			ssLog("Error in till_uses  on delete\n$query");
+			posLog("Error in till_uses  on delete\n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -80,9 +80,9 @@ require_once "connectPOS.php";
 		$keylist=implode(",",$keylist);
 		$valuelist = implode(",",$valueList);
 		$query = "insert into till_uses ($keylist) values($valuelist);";
-//		ssLog($query);
+//		posLog($query);
 		if ($db->query($query)===false) {
-			ssLog("Error in till_uses  on create\n$query");
+			posLog("Error in till_uses  on create\n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!\n$query";
@@ -94,7 +94,7 @@ require_once "connectPOS.php";
 //print "<br> pre $query";
 		$result = $db->query($query);
 		if ($result===false) {
-			ssLog("Error in till_uses .. select\n$query");
+			posLog("Error in till_uses .. select\n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -122,7 +122,7 @@ require_once "connectPOS.php";
 		$qlist=implode(',',$qPart);
 		$query = "update till_uses set $qlist where id=".$_REQUEST['id'].";";
 		if (!$db->query($query)) {
-			ssLog("Error in till_uses  on update/n$query");
+			posLog("Error in till_uses  on update/n$query");
 			$jTableResult = array();
 			$jTableResult['Result']  = "ERROR";
 			$jTableResult['Message'] = "error in MySQL!!!";
@@ -135,7 +135,7 @@ require_once "connectPOS.php";
 		exit;
 	}
 	else {
-		ssLog("Error in till_uses - invalid action=".$_REQUEST['action']);
+		posLog("Error in till_uses - invalid action=".$_REQUEST['action']);
 		$jTableResult = array();
 		$jTableResult['Result']  = "ERROR";
 		$jTableResult['Message'] = "Invalid action";
