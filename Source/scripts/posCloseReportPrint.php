@@ -60,7 +60,7 @@ use Escpos\PrintConnectors\WindowsPrintConnector;
 		if ($entryType=='tillOpen' and $to=='0.00') {
 			// if last entry from previous day is Till Open, include that amount in report.
 			$date = date("Y-m-d",strtotime('-1 day'));
-			$result = $db->query("select * from tills where DATE(date)='$date' order by ID desc limit 1");
+			$result = $db->query("select * from tills where tillName = 'till$i' and DATE(date)='$date' order by ID desc limit 1");
 			if ($result) {
 				$row = $result->fetch_assoc();
 				if ($row['entryType']=='tillOpen') $to = number_format($row['amount'],2);
