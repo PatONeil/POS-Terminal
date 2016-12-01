@@ -21,7 +21,7 @@ for various time periods and a summary of sales for the last 30 days.   Someone 
 with MySQL could easily add additional reports specific to your company needs.
 
 It uses the following software packages: jQuery,  jQuery-ui, js-tree, jtable, 
-jQuery Validation Engine and escpos for ticket printing.   
+jQuery-ui timepicker addon, jQuery Validation Engine and escpos for ticket printing.   
 
 While the server can be located a separate system, it is possible to implement 
 both the server and client (chrome for example) on a POS terminal.

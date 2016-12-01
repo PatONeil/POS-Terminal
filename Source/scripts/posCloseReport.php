@@ -12,6 +12,7 @@
 require_once "connectPOS.php";
 require_once "optionsTable.php";
 	$till_Totals = array();
+	for ($i=0;$i<10;$i++) $till_Totals[$i]=0;
 	function getSalesTotal() {
 		global $db,$salesTotals,$_date;
 		$query = "select count(*) as 'orders', sum(total) as 'total', ".
