@@ -59,7 +59,8 @@
 							dataType: "text",
 							url: "scripts/menuTreeActions.php",
 							data: {action:'load',file:true},
-							success: function( data ) {
+							success: function( data ) {	// returns OK in data ...
+								// reload new menu tree and then return to manager page
 								$.when(posTerminal.loadmMenuTreeTable()).then(posTerminal.page.manager);
 							},
 							error: function(jqXHR, textStatus, errorThrown ){

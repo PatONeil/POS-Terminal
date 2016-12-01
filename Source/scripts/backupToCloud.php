@@ -18,7 +18,7 @@ ini_set("memory_limit","2024M");
 		if (is_dir($dir)) rmdir($dir); 
 	}
 	function sendToCloud($filename) {
-		$host ="http://cafe.pjoneil.net/POS/scripts/archiveDB.php";
+		$host ="http://yourBackupServer/POS/scripts/archiveDB.php";
 		// set post fields
 		if (function_exists('curl_file_create')) { // php 5.6+
 			$cFile = curl_file_create($filename);

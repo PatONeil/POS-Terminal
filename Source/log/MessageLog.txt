@@ -1,0 +1,95 @@
+2016-12-01 21:43:16autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:43:16Client Msg: T1: POS Terminal Starting
+2016-12-01 21:43:18getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 21:43:18Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 21:43:18Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 21:46:18autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:46:19Client Msg: T1: POS Terminal Starting
+2016-12-01 21:46:20getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 21:46:20Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 21:46:20Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 21:48:35autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:48:35Client Msg: T1: POS Terminal Starting
+2016-12-01 21:48:37getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 21:48:37Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 21:48:37Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 21:48:47autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:48:48Client Msg: T1: POS Terminal Starting
+2016-12-01 21:48:50getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 21:48:50Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 21:48:50Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 21:49:30autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:49:31Client Msg: T1: POS Terminal Starting
+2016-12-01 21:49:33getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 21:49:33Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 21:49:33Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 21:51:42autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:51:43Client Msg: T1: POS Terminal Starting
+2016-12-01 21:51:59getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 21:51:59Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 21:51:59Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 21:53:25autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:54:16autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 21:55:49Client Msg: T1: POS Terminal Starting
+2016-12-01 21:57:36getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 21:57:36Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:00:03Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:05:47Client Msg: T1: Order Cancel: type=default, lastOrderNumber=2
+2016-12-01 22:05:53getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:05:53Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:10:59Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:11:00autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 22:11:06Client Msg: T1: POS Terminal Starting
+2016-12-01 22:11:08getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:11:08Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:11:12Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:14:30autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 22:14:30Client Msg: T1: POS Terminal Starting
+2016-12-01 22:14:32getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:14:32Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:14:32Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:15:28autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 22:15:28Client Msg: T1: POS Terminal Starting
+2016-12-01 22:15:30getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:15:30Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:15:30Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:22:37autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 22:22:38Client Msg: T1: POS Terminal Starting
+2016-12-01 22:22:39getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:22:39Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:22:39Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:28:04autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 22:28:04Client Msg: T1: POS Terminal Starting
+2016-12-01 22:28:06getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:28:06Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:28:06Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:34:26autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 22:34:27Client Msg: T1: POS Terminal Starting
+2016-12-01 22:34:29getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:34:29Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:34:29Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 22:42:59autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 22:43:00Client Msg: T1: POS Terminal Starting
+2016-12-01 22:43:01getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 22:43:01Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 22:43:01Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 23:01:21autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 23:01:21Client Msg: T1: POS Terminal Starting
+2016-12-01 23:01:23getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 23:01:23Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 23:01:23Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 23:03:21autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 23:03:21Client Msg: T1: POS Terminal Starting
+2016-12-01 23:03:24getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 23:03:24Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 23:03:24Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 23:08:02autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 23:08:03Client Msg: T1: POS Terminal Starting
+2016-12-01 23:08:10getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 23:08:10Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 23:08:10Client Msg: T1: Order Init: type=default, lastOrderNumber=2
+2016-12-01 23:10:50autoOpenTill Mgr till=1 and openTill=1
+2016-12-01 23:10:51Client Msg: T1: POS Terminal Starting
+2016-12-01 23:10:52getOrderNumber orderNumber=1, orderDate=2016-12-01 12:48:34
+2016-12-01 23:10:52Client Msg: T1: Loaded last Order Number: 1
+2016-12-01 23:10:52Client Msg: T1: Order Init: type=default, lastOrderNumber=2
