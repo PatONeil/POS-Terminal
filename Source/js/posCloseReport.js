@@ -19,7 +19,7 @@
 				var button = $(e.target).text().trim();
 				switch (button) {
 					case 'Close Tills':
-						self.closeTills();
+						self.checkPrior();
 						break;
 					case 'Print':
 						self.printReport();
@@ -31,6 +31,43 @@
 			});
 			
 		},
+		checkPrior: function() {
+			var self = this;
+			$.ajax({					// 
+				dataType: "json",
+				url: "scripts/tillManager.php",
+				data: {action:'priorClose'},
+				success: function( results ) {
+					if (results.Result=="false") self.closeTills();
+					else {
+						var msg="Daily Close has already been performed.  Do you wish to void previous close?";
+						posTerminal.confirm(msg,function() {
+							self.voidPriorClose();
+						});
+					}	
+				},
+				error: function(jqXHR, textStatus, errorThrown ){
+					alert("Till Close: "+textStatus+"  "+errorThrown);
+				}
+			});			
+		},
+		voidPriorClose:function() {
+			var self = this;
+			$.ajax({					// 
+				dataType: "json",
+				url: "scripts/tillManager.php",
+				data: {action:'voidPriorClose'},
+				success: function( results ) {
+					if (results.Result=="OK") {
+						// reload....
+						posTerminal.page.closeReport();
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown ){
+					alert("Till Close: "+textStatus+"  "+errorThrown);
+				}
+			});			
+		},
 		closeTills:	function() {
 			var till,i;
 			for (i in posTerminal.options) {
@@ -38,6 +75,7 @@
 					this.tillClose(i);
 				}
 			}
+			alert("Daily Close Performed.<br><br>Auto Open Till(s) performed if specified in Options");
 		},
 		tillClose:			function(till) {
 			var self = this;
@@ -45,7 +83,7 @@
 			$.ajax({					// 
 				dataType: "json",
 				url: "scripts/tillManager.php",
-				data: {action:'closeTill',till:till,amount:-parseFloat(self.tillTotals[t]),employeeID:posTerminal.mgrEmployeeID},
+				data: {action:'closeTill',dailyClose:true,till:till,amount:-parseFloat(self.tillTotals[t]),employeeID:posTerminal.mgrEmployeeID},
 				success: function( results ) {
 					if (results.Result=="OK") {
 						posTerminal.logMessage("Till Close from Close Report for "+till+","+t);
@@ -66,7 +104,7 @@
 			$.ajax({
 				dataType: "json",
 				url: "scripts/tillManager.php",
-				data: {action:'autoOpenTill',till:till},
+				data: {action:'autoOpenTill',till:till,dailyClose:true},
 				success: function( results ) {
 					if (results.Result=="ERROR") {
 						alert("Till AutoOpen Server Error,"+results.Message);

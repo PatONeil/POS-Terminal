@@ -16,8 +16,9 @@ require_once "optionsTable.php";
 		'autoOpenTill'=>function() {
 			global $db,$optionsActions;
 			$till = $_REQUEST['till']; 
+			$daily  = isset($_REQUEST['dailyClose'])?' via Daily Close':'';
 			$openTill = call_user_func($optionsActions['getValue'],"autoOpenTill{$till}");
-			posLog("autoOpenTill Mgr till=$till and openTill=$openTill");			
+			posLog("autoOpenTill Request for till=$till and openTill=$openTill");			
 			if (!$openTill) {
 				$query = "SELECT * FROM tills where tillName = 'till$till' " .
 						 "and (entryType='tillOpen' or entryType='tillClose') ".
@@ -72,7 +73,7 @@ require_once "optionsTable.php";
 				exit;
 			}
 			$openTillAmt = call_user_func($optionsActions['getValue'],"autoOpenTill{$till}Amt");
-			$date = "Auto open on ".date('m-d H:i');  
+			$date = "Auto open on ".date('m-d H:i').$daily;  
 			$query = "INSERT INTO `tills` (`tillName`,`entryType`,`reference`,`amount`,`employeeID`) VALUES ('till$till','tillOpen','$date',$openTillAmt,-1);";
 			$result = $db->query($query);
 			if ($result!==true) {
@@ -83,7 +84,7 @@ require_once "optionsTable.php";
 				print json_encode($jTableResult);
 				exit;
 			}
-			posLog("Till$till automatically opened, should have been closed!!!");
+			posLog("Till$till automatically opened with $openTillAmt.");
 			$jTableResult = array();
 			$jTableResult['Message'] = "Till$till automatically opened with $openTillAmt.";
 			$jTableResult['Result'] = "OK";
@@ -134,11 +135,39 @@ posLog("openTill Mgr till=$till");
 				exit;
 			}
 		},
+		'priorClose' =>function() {
+			global $db;
+			$date = date('Y-m-d');
+			$jTableResult = array();
+			$query = "Select * from tills where DATE(date)='$date' and reference like 'Daily Close%';";
+			$result = $db->query($query);
+			if ($result and  $result->num_rows!=0) {
+				$jTableResult['Result']  = "true";
+				print json_encode($jTableResult);
+				exit;
+			}
+			$jTableResult['Result']  = "false";
+			print json_encode($jTableResult);
+			exit;
+		},
+		
+		'voidPriorClose'=>function() {
+			global $db;
+			$date = date('Y-m-d');
+			$jTableResult = array();
+			$query = "Delete from tills where DATE(date)='$date' and reference like '%Daily Close%';";
+			$result = $db->query($query);
+			$jTableResult['Result']  = "OK";
+			print json_encode($jTableResult);
+			exit;
+		},
 		'closeTill'=>function() {
 			global $db;
 			$till = $_REQUEST['till'];
-posLog("closeTill Mgr till=$till");			
 			$amount = $_REQUEST['amount'];
+			$daily  = isset($_REQUEST['dailyClose'])?'Daily ':'';
+			posLog("{$daily}Close till=$till with $amount in till");			
+
 			$employeeID=$_REQUEST['employeeID'];
 			$query = "SELECT * FROM tills where tillName = '$till' " .
 					 "and (entryType='tillOpen' or entryType = 'tillClose') ".
@@ -153,7 +182,7 @@ posLog("closeTill Mgr till=$till");
 				exit;
 			}
 			if ($result->num_rows == 0 or ($result->fetch_assoc()['entryType']) == 'tillOpen') {
-				$date = "Closed on ".date('m-d H:i');  
+				$date = "{$daily}Closed on ".date('m-d H:i');  
 				$query = "INSERT INTO `tills` (`tillName`,`entryType`,`reference`,`amount`,`employeeID`) VALUES ('$till','tillClose','$date',$amount,$employeeID);";
 				$result = $db->query($query);
 				if ($result!==true) {

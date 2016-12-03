@@ -33,41 +33,57 @@ require_once "optionsTable.php";
 		$salesTotals['unpaid'] = number_format(floatval($total)-$paid,2);
 		return $salesTotals;
 	}
+	
+	function findStartTillTime($till) {
+		global $db,$_date;
+		$yesterday = date("Y-m-d",strtotime('-1 day',strtotime($_date)));
+		$query = "select * from tills where tillname = 'till$till' and DATE(date) = '".$_date."' limit 1;";
+	    $result = $db->query($query);
+		if ($result and $result->num_rows!=0) {
+			$row =  $result->fetch_assoc();
+			if ($row['entryType']=='tillOpen') return $row['date'];
+		}
+		$query = "select * from tills where tillname = 'till$till' and ".
+				 "DATE(date) = '".$yesterday."' and ".
+				 "entryType = 'tillOpen' order by id desc ".
+				 "limit 1;";
+	    $result = $db->query($query);
+		if ($result and $result->num_rows!=0) {
+			$row =  $result->fetch_assoc();
+			return $row['date'];
+		}
+		return "$_date 00:00:00";
+	}
 	function getTillTotals($till) {
-		global $db,$tillTotals,$_date;
+		global $db,$tTotals;
+		$startTime = findStartTillTime($till);
 		$query = "select entryType, count(*) as 'count', sum(amount) as 'amount' from tills ".
-				 "where DATE(date) = '".$_date."' and tillName = 'till$till' ".
+				 "where date >= '".$startTime."' and tillName = 'till$till' ".
+				 "and ((date = '".$startTime."' and tillName = 'till$till' and entryType='tillClose')!=true) ". 
 				 "group by entryType;";
 	    $result = $db->query($query);
-		$tillTotals = array('count'=>0);
+		$tDate = "till{$till}Date";
+		$tTotals = array('count'=>0,'date'=>$startTime);
 		while($row = $result->fetch_assoc()) {
-			$tillTotals[$row['entryType']] = $row['amount'];
-			$tillTotals['count']+=1;
+			$tTotals[$row['entryType']] = $row['amount'];
+			$tTotals['count']+=1;
 		}
-		return $tillTotals;		 
+		return $tTotals;		 
 	}
 	function getTillDetail($till,$entryType) {
-		global $db,$_date;
+		global $db,$tTotals;
+		$startTime = $tTotals['date'];
 		$query = "select * from tills ".
-				 "where DATE(date) = '".$_date."' and tillName = 'till$till' ".
+				 "where date >= '".$startTime."' and tillName = 'till$till' ".
+				 "and ((date = '".$startTime."' and tillName = 'till$till' and entryType='tillClose')!=true) ". 
 				 "and entryType = '$entryType';";
 		$result = $db->query($query);
 		return   $result->fetch_all(MYSQLI_ASSOC);
 	}
-	function printTillDetail($i,$tTotals,$entryType,$description,$detail=false){
+	function printTillDetail($i,&$tTotals,$entryType,$description,$detail=false){
 		global $db;
 		$html = '';
 		if (isset($tTotals[$entryType])) $to = number_format($tTotals[$entryType],2); else $to = "0.00";
-		if ($entryType=='tillOpen' and $to=='0.00') {
-			// if last entry from previous day is Till Open, include that amount in report.
-			$date = date("Y-m-d",strtotime('-1 day'));
-			$result = $db->query("select * from tills where tillName = 'till$i' and DATE(date)='$date' order by ID desc limit 1");
-			if ($result) {
-				$row = $result->fetch_assoc();
-				if ($row['entryType']=='tillOpen') $to = number_format($row['amount'],2);
-				$tillTotals[$row['entryType']] = $row['amount'];
-			}
-		}
 		if ($detail and isset($tTotals[$entryType])) {
 			$description .= ' Total';
 			$det = getTillDetail($i,$entryType);
@@ -92,16 +108,14 @@ require_once "optionsTable.php";
 		$html .= 	printTillDetail($i,$tTotals,'add',"Till Add",true);
 		$html .= 	printTillDetail($i,$tTotals,'drop',"Till Drop",true);
 		$html .= 	printTillDetail($i,$tTotals,'vendor',"Till Vendor",true);
-//		if (isset($tTotal['tillClose'])) 
-//			$html .= printTillDetail($i,$tTotals,'tillClose',"Till Close");
 		$total=0;
 		foreach ($tTotals as $key=>$item) {
-			if ($key=='count') continue;
-			$total+=floatval($item);
+			if ($key=='count' or $key=='date') continue;
+			$total+=round(floatval($item),2);
 		}
 		$till_Totals[$i] = $total;
 		$html .= '	<tr><td colspan="2"><hr></td></tr>';
-		$html .= '	<tr><td>Till '.$i.' Total</td><td style="text-align:right;">'.number_format($total,2).'</td></tr>';
+		$html .= '	<tr><td>Current Till '.$i.' Total</td><td style="text-align:right;">'.number_format($total,2).'</td></tr>';
 		$html .= '</tbody></table>';
 		return $html;
 	}
