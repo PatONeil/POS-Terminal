@@ -100,6 +100,11 @@
 						alert('No till records to display. Were there any activity today?');
 						return;
 					}
+					if (results.Records.length==1 && results.Records[0].entryType=='tillClose') {
+						alert('Till already closed!');
+						return;
+					}
+					
 					self.settlementDialog(results.Records);
 				},
 				error: function(jqXHR, textStatus, errorThrown ){

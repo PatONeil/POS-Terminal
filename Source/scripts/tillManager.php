@@ -256,15 +256,28 @@ posLog("Till= $till already closed, must be opened before re-closing.");
 		'settlementPreview'=>function() {
 			global $db;
 			$till = $_REQUEST['till'];
-			$query = "select * from tills where tillName='$till' and date >= ".
-					 "(select date from tills where entryType = 'tillOpen' order by date desc limit 1) ".
+			$query = "select date from tills where entryType = 'tillOpen' or ".
+					 "entryType = 'tillClose' order by id desc limit 1 ";
+
+			$result = $db->query($query);
+			if (!$result or $result->num_rows==0) {
+				posLog("Error in query\n $query");
+				$jTableResult = array();
+				$jTableResult['Result'] = "OK";
+				$jTableResult['Records'] = array();
+				print json_encode($jTableResult);
+				exit;
+			}
+			$date = $result->fetch_assoc()['date'];
+			$query = "select * from tills where tillName='$till' and date >= '$date' and ".
+					 "(entryType = 'tillClose' and date='$date' )=false ".
 					 "order by entryType desc;";
 			$result = $db->query($query);
 			if (!$result) {
 				posLog("Error in query\n $query");
 				$jTableResult = array();
 				$jTableResult['Result']  = "ERROR";
-				$jTableResult['Message'] = "error in MySQL!!!";
+				$jTableResult['Message'] = "error in MySQL!!!$query";
 				print json_encode($jTableResult);
 				exit;
 			}

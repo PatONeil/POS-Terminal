@@ -673,6 +673,10 @@
 				   //console.log('zoom reset');
 				   }
 			});
+			$('#posTerminal').on('click mousewheel',function() {
+				$('#posTerminal').off('click mousewheel');
+				posTerminal.toggleFullScreen();
+			});
 		});
 
 /*------------------------------------------------------------------------------------------------------------------------*/
