@@ -79,6 +79,8 @@
 			var ndx,data,type,treeNode = this.order.currentTreeNode;
 			for (ndx in treeNode.children) {
 				data = treeNode.children[ndx];
+				// menutree and the menutree data in cell are different
+				data = $("#Cell-"+data.row+"-"+data.col+"-menu").data();
 				type = posTerminal.menuTypes[data.type];
 				if (type=='requiredSelection' && data.subMenu==-1) return false;
 			}
@@ -128,17 +130,25 @@
 			this.refreshMenuFromTree(this.menuTree);
 		},
 		prepareSelection:	function(treeNode,id,mClass) {
-			var i,node,type,nodes,caption='',hasDefaultSelection=false,rows,cols=1,cnt,s='',h="",left=-3;
+			var i,node,type,subMenu=-1,nodes,caption='',hasDefaultSelection=false,rows,cols=1,cnt,s='',h="",left=-3;
+			if (this.order.mode=="Edit" && typeof(this.order.menuItems[this.order.menuIndex].options[treeNode.id])!='undefined') {
+				subMenu = this.order.menuItems[this.order.menuIndex].options[treeNode.id].subMenu;
+			}
 			nodes={}; // set up to sort in row,col order
 			for (i=0;i<treeNode.children.length;i++) {
 				node = treeNode.children[i];
+				if (i==subMenu) {
+					hasDefaultSelection=true;
+					caption = node.text;
+					treeNode.subMenu = i;
+				}
 				treeNode.children[i].ndx = i;
 				nodes[node.row+node.col*8]=treeNode.children[i];
 			}
 			for (i in nodes) {
 				node = nodes[i];
 				type = posTerminal.menuTypes[node.type];
-				if (type=='defaultAttribute') {
+				if (type=='defaultAttribute' && subMenu==-1) {
 					hasDefaultSelection=true;
 					caption = node.text;
 					//treeNode.children[node.ndx].data.subMenu = i;
@@ -266,7 +276,8 @@
 							if (!self.currentSelTarget) return;		// entered without currentSel
 							console.log("Entered click for div Elements-with currentSel");
 							var div = $(e.delegateTarget), ndx  = div.data('value'), ul_id = div.parent().attr('id');
-							var did = ul_id.substr(0,ul_id.length-3);//, treeNode = $('#'+did).data();
+							var did = ul_id.substr(0,ul_id.length-3);
+							treeNode = $('#'+did).data();
 							$(self.currentSelTarget).css('display','none');
 							self.currentSelTarget='';
 							$(document).off('click.menuMgr');
@@ -289,7 +300,7 @@
 		},
 		menuItemClick:			function(treeNode,target) {
 			var type = posTerminal.menuTypes[treeNode.type];
-			var data, i, menuID, selTree;
+			var data, i, selTree;
 			switch (type) {
 				case 'subMenu':
 					this.refreshMenuFromTree(treeNode);

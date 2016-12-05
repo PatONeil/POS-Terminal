@@ -44,7 +44,7 @@ require_once "optionsTable.php";
 			if ($row['entryType']=='tillOpen') return $row['date'];
 		}
 		$query = "select * from tills where tillname = 'till$till' and ".
-				 "DATE(date) = '".$yesterday."' and ".
+				 "DATE(date) <= '".$yesterday."' and ".
 				 "entryType = 'tillOpen' order by id desc ".
 				 "limit 1;";
 	    $result = $db->query($query);

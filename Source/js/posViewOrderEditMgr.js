@@ -54,9 +54,10 @@
 				for (j in menuItem.options) {
 					option = menuItem.options[j];
 					option.price    = parseFloat(option.price);
+					option.subMenu  = parseInt(option.subMenu);
 					option.treeNode = this.findMenuTreeFromID(option.treeNodeID);
 					delete option.treeNodeID;
-					newo[option.treeNode.menuID]=option;
+					newo[option.treeNode.id]=option;
 				}
 				menuItem.options=newo;
 			}	

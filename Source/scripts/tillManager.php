@@ -46,7 +46,7 @@ require_once "optionsTable.php";
 			// do we need to open? No, if last entry of previous day or open entry for this day;
 			$query = "SELECT * FROM tills where tillName = 'till$till' " .
 					 "and (entryType = 'tillOpen' or entryType = 'tillClose') ".
-					 "and (DATE(date) = '$yesterday' or DATE(date) = '$today') ".
+					 "and (DATE(date) <= '$yesterday' or DATE(date) = '$today') ".
 					 "order by id desc limit 1;";
 			$result = $db->query($query);
 			if ($result->num_rows) {

@@ -335,7 +335,7 @@
 				if (treeNode.priceOverride!=-1) price =treeNode.priceOverride;
 				else if (treeNode.productID) price = this.products[treeNode.productID].price;
 			}
-			options[id] = {treeNode:treeNode,product:" * "+option+" "+product,price: parseFloat(price)};
+			options[id] = {subMenu:treeNode.subMenu,treeNode:treeNode,product:" * "+option+" "+product,price: parseFloat(price)};
 			this.refreshTicketDisplay();
 		},
 		deleteMenuOption: 		function(menuIndex,treeNode, id) {

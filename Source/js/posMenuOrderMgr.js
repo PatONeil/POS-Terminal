@@ -128,7 +128,7 @@
 				delete item.menuTree;
 				o = [];
 				for (j in item.options) {
-					o.push(item.options[j].treeNode.id + '~' + item.options[j].product + '~' + item.options[j].price);
+					o.push(item.options[j].treeNode.id + '~' + item.options[j].product + '~' + item.options[j].price + '~' + item.options[j].treeNode.subMenu);
 				}
 				item.options = o.join('^');
 			}

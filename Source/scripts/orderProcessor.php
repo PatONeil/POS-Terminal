@@ -80,11 +80,11 @@ require_once "connectPOS.php";
 			foreach ($menuItems as $menuItem) {
 				if ($menuItem['options']){
 					$menuItem['options'] = explode('^',$menuItem['options']);
-					$keys=array("treeNodeID",'product','price');
+					$keys=array("treeNodeID",'product','price','subMenu');
 					foreach ($menuItem['options'] as &$option) {
-						$l=array();
+						$l=array('subMenu'=>-1);
 						$option = explode('~',$option);
-						for ($i=0;$i<3;$i++) {
+						for ($i=0;$i<count($option);$i++) {
 							$l[$keys[$i]] = $option[$i];
 						}
 						$option = $l;
@@ -183,8 +183,6 @@ posLog($query);
 				$db->query("delete from orders where id = '{$fields['id']}'");
 				// setup date field in sql format
 				$fields['orderDate']= date("Y-m-d H:i:s",strtotime($fields['orderDate']));  	// convert date to MySql format.
-//				if ($fields['settlementDate'])
-//					$fields['settlementDate']= date("Y-m-d H:i:s",strtotime($fields['settlementDate']));  	// convert date to MySql format.
 			}
 			if (isset($fields['settlementDate']) and $fields['settlementDate']) {
 				$fields['settlementDate']= date("Y-m-d H:i:s",strtotime($fields['settlementDate']));  	// convert date to MySql format.
@@ -219,6 +217,7 @@ posLog($query);
 				foreach ($itemFieldList as $field) {
 					if (!isset($item[$field])) continue;   // ignore missing fields;
 					if ($field=='productID' and is_numeric($item[$field])==false) {
+						posLog("Invalid ProductID \r\n".var_export($fields,true));
 						$item[$field] = 0;
 					}
 					$keylist[] = "`$field`";
